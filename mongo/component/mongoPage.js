@@ -126,18 +126,6 @@ export default function BasicTextFields() {
           >
             Fetch
           </Button>
-          <Button
-            variant="contained"
-            onClick={(e, name) => {
-              e.preventDefault();
-
-              uploadAlbum(name);
-            }}
-            type="submit"
-            sx={{ margin: "20px" }}
-          >
-            Upload
-          </Button>
         </div>
         <Grid item xs={12}>
           <form onSubmit={uploadAlbum}>
