@@ -77,10 +77,6 @@ def find():
     id.delete(0, END)
     id.insert(END, records[0][5])
 
-    # for r in records:
-    # print_records += str(r) + '\n'
-    # query_label = Label(root, text=print_records)
-    # query_label.grid(row=12, column=0, columnspan=2)
 
     my_connect.commit()
     my_connect.close()
@@ -135,6 +131,7 @@ def delete():
     my_connect.close()
 
     # ============= Create text box for input  =========
+    
 username = Entry(root, width=30)
 username.grid(row=0, column=1, padx=20)
 
