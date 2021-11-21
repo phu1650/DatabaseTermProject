@@ -77,7 +77,6 @@ def find():
     id.delete(0, END)
     id.insert(END, records[0][5])
 
-
     my_connect.commit()
     my_connect.close()
 
@@ -119,8 +118,9 @@ def delete():
     my_cur = my_connect.cursor()
     my_cur.execute("DELETE FROM user where username = '" +
                    str(username.get()) + "'")
+
     records = my_cur.fetchall()
-    # print(records)
+
     print_records = ''
     for r in records:
         print_records += str(r[2]) + '\n'
@@ -131,7 +131,8 @@ def delete():
     my_connect.close()
 
     # ============= Create text box for input  =========
-    
+
+
 username = Entry(root, width=30)
 username.grid(row=0, column=1, padx=20)
 

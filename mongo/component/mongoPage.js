@@ -95,7 +95,7 @@ export default function BasicTextFields() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
+              <TableCell>Album Name</TableCell>
               <TableCell align="right">Description</TableCell>
             </TableRow>
           </TableHead>
@@ -124,7 +124,7 @@ export default function BasicTextFields() {
             type="submit"
             sx={{ margin: "20px" }}
           >
-            Fetch
+            Fetch Album
           </Button>
         </div>
         <Grid item xs={12}>

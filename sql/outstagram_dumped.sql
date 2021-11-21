@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-  `c_id` varchar(10) NOT NULL,
+  `c_id` varchar(10) NOT NULL REFERENCES user(id) ON DELETE CASCADE ,
   `credit_card` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -219,7 +219,7 @@ DROP TABLE IF EXISTS `user_national_id`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_national_id` (
-  `national_id` varchar(13) NOT NULL,
+  `national_id` varchar(13) NOT NULL REFERENCES user(national_id) ON DELETE CASCADE,
   `birthdate` datetime DEFAULT NULL,
   `gender` varchar(64) DEFAULT NULL,
   `firstname` varchar(64) DEFAULT NULL,
