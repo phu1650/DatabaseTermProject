@@ -14,6 +14,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 // const { MongoClient } = require("mongodb");
+import CircularProgress from "@mui/material/CircularProgress";
 
 // const MONGO_USERNAME = process.env.NEXT_PUBLIC_MONGO_USERNAME;
 // const MONGO_PASSWORD = process.env.NEXT_PUBLIC_MONGO_PASSWORD;
@@ -28,23 +29,15 @@ import TableRow from "@mui/material/TableRow";
 
 export default function BasicTextFields() {
   const [album, setAlbum] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [uploading, setUploading] = React.useState(false);
 
   const inputHandler = (code) => {
     console.log(code);
-    // try {
-    //   eval(code);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
-  // const addAlbum = (e) => {
-  //   e.preventDefault();
-  //   const name = e.target.name.value;
-  //   setAlbum([...album, { name: name }]);
-  // };
-
   const getAlbum = async () => {
+    setLoading(true);
     Axios.get("http://localhost:3000/api/album")
       .then(function (response) {
         // handle success
@@ -57,6 +50,7 @@ export default function BasicTextFields() {
       })
       .then(function () {
         // always executed
+        setLoading(false);
       });
   };
 
@@ -65,6 +59,7 @@ export default function BasicTextFields() {
     e.preventDefault();
     const name = e.target.name.value;
     const description = e.target.description.value;
+    setUploading(true);
 
     Axios.post("http://localhost:3000/api/uploadImage", {
       array: [...album, { name: name, amount: 0, description: description }]
@@ -80,6 +75,7 @@ export default function BasicTextFields() {
       })
       .then(function () {
         // always executed
+        setUploading(false);
       });
   };
 
@@ -113,6 +109,8 @@ export default function BasicTextFields() {
             ))}
           </TableBody>
         </Table>
+
+        {loading ? <CircularProgress color="success" /> : null}
         <div style={{ margin: "20px" }}>
           <Button
             variant="contained"
@@ -128,7 +126,11 @@ export default function BasicTextFields() {
           </Button>
         </div>
         <Grid item xs={12}>
-          <form onSubmit={uploadAlbum}>
+          <form
+            onSubmit={async (e) => {
+              uploadAlbum(e);
+            }}
+          >
             <TextField id="name" label="Name" variant="outlined" sx={{}} />
             <TextField
               id="description"
@@ -150,6 +152,7 @@ export default function BasicTextFields() {
             </Button>
           </form>
         </Grid>
+        {uploading ? <CircularProgress color="success" /> : null}
       </Grid>
     </div>
   );

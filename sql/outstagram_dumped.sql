@@ -60,9 +60,11 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-  `c_id` varchar(10) NOT NULL REFERENCES user(id) ON DELETE CASCADE ,
+  `c_id` varchar(10) NOT NULL,
   `credit_card` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`c_id`)
+  PRIMARY KEY (`c_id`),
+  CONSTRAINT ID_REF FOREIGN KEY(`c_id`) 
+        REFERENCES user(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -201,6 +203,11 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+CREATE INDEX index_name
+ON user (national_id);
+
+
 --
 -- Dumping data for table `user`
 --
@@ -219,12 +226,13 @@ DROP TABLE IF EXISTS `user_national_id`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_national_id` (
-  `national_id` varchar(13) NOT NULL REFERENCES user(national_id) ON DELETE CASCADE,
+  `national_id` varchar(13) NOT NULL,
   `birthdate` datetime DEFAULT NULL,
   `gender` varchar(64) DEFAULT NULL,
   `firstname` varchar(64) DEFAULT NULL,
   `lastname` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`national_id`)
+  PRIMARY KEY (`national_id`),
+  FOREIGN KEY(`national_id`) REFERENCES User(`national_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -266,3 +274,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-11-19 18:19:39
+

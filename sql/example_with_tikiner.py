@@ -10,7 +10,7 @@ from datetime import datetime
 root = tk.Tk()
 root.title("Outstagram")
 root.option_add("*Font", "consolas 15")
-root.geometry("1000x600")
+root.geometry("600x600")
 
 
 def create_quote(string):
@@ -54,8 +54,9 @@ def find():
         database="Outstagram"
     )
     my_cur = my_connect.cursor()
-    my_cur.execute(
-        "SELECT * FROM user AS U JOIN customer AS C JOIN user_national_id AS UID ON C.c_id = id AND U.national_id =  UID.national_id  WHERE username = '" + str(username.get()) + "'")
+    my_cur.execute("CALL GetCustomer('" + str(username.get())+"')")
+    # my_cur.execute(
+    #     "SELECT * FROM user AS U JOIN customer AS C JOIN user_national_id AS UID ON C.c_id = id AND U.national_id =  UID.national_id  WHERE username = '" + str(username.get()) + "'")
     records = my_cur.fetchall()
     print(records)
 
