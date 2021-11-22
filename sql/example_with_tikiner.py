@@ -119,6 +119,8 @@ def delete():
     my_cur = my_connect.cursor()
     my_cur.execute("DELETE FROM user where username = '" +
                    str(username.get()) + "'")
+    my_cur.execute("DELETE FROM user where username = '" +
+                   str(username.get()) + "'")
 
     records = my_cur.fetchall()
 
